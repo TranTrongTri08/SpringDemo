@@ -3,6 +3,7 @@ VOLUME /tmp
 USER root
 RUN pwd
 RUN ls -la
+RUN getent passwd
 RUN mkdir /home/ec2-user/logs
 RUN pwd
 RUN chown root /home/ec2-user/logs
