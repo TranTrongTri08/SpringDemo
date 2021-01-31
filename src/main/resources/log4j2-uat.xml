@@ -21,7 +21,7 @@
 		</Console>
 		<!-- Write log to file using Rolling File Appender -->
 		<RollingFile name="FileAppender"
-			fileName="var/logs/app_info.log"
+			fileName="/var/logs/app_info.log"
 			filePattern="${FilePath}${sys:file.separator}app_info_%d{yyyyMMdd}.log.zip">
 			<PatternLayout>
 				<Pattern>${FilePattern}</Pattern>
