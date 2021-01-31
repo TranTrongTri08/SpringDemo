@@ -1,5 +1,4 @@
 FROM openjdk:8-jdk-alpine
-VOLUME /tmp
 USER root
 RUN pwd
 RUN mkdir -p /home/ec2-user/logs
