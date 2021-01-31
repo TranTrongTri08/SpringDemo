@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="ConsolePattern">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger{36}.%M - %msg%n
+		</Property>
+		<Property name="FilePattern">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger{36}.%M - %msg%n
+		</Property>
+		<Property name="FilePath">
+			${sys:file.separator}${sys:user.home}${sys:file.separator}logs
+		</Property>
+		<Property name="FileName">%d{yyyy-MM-dd HH:mm:ss.SSS}.log</Property>
+	</Properties>
+	<Appenders>
+		<!-- Write log to console -->
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>${ConsolePattern}</pattern>
+			</PatternLayout>
+		</Console>
+		<!-- Write log to file using Rolling File Appender -->
+		<RollingFile name="FileAppender"
+			fileName="${sys:user.home}/logs/app_info.log"
+			filePattern="${FilePath}${sys:file.separator}app_info_%d{yyyyMMdd}.log.zip">
+			<PatternLayout>
+				<Pattern>${FilePattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<!-- Specify max size of a file. When file size over max size, it will 
+					write log to new file as file pattern that format with time and counting 
+					integer -->
+<!-- 				<SizeBasedTriggeringPolicy size="100 MB" /> -->
+
+<!-- 				Depend on minimum unit of date time in filePattern  -->
+<!-- 				Rolling file everyday -->
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+			</Policies>
+			<!-- Specify max number files that will be kept -->
+<!-- 			<DefaultRolloverStrategy max="10" /> -->
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="error">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="FileAppender" />
+		</Root>
+		<Logger name="org.springframework" level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+		<Logger name="org.hibernate" level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+		<Logger name="com.mfec.estampduty" level="info" additivity="false">
+			<AppenderRef ref="STDOUT" />
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+	</Loggers>
+</Configuration>
