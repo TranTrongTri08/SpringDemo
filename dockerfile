@@ -2,6 +2,7 @@ FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 USER root
 RUN pwd
+RUN ls -la
 RUN mkdir /home/ec2-user/logs
 RUN pwd
 RUN chown root /home/ec2-user/logs
